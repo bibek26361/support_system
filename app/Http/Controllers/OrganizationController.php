@@ -50,7 +50,7 @@ class OrganizationController extends Controller
             'phonenumber' => ['required'],
             'mobilenumber' => 'required|min:10|max:15|unique:organizations',
             'anydesk_no' => 'required|min:9|max:9|unique:organizations',
-            'pan_vat_number' => 'required|min:16|max:20|unique:organizations',
+            'pan_vat_number' => 'required|min:9|max:9|unique:organizations',
             'representativename' => ['required'],
             'status' => ['required'],
             'longitude' => ['required'],

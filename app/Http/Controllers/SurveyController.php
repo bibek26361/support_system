@@ -123,6 +123,11 @@ class SurveyController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'organization_id' => 'required',
+            'representative_name' => 'required',
+            'feedback' => 'required',
+        ]);
         $survey = Survey::find($id);
         if ($request->hasfile('signature_image')) {
             $image = $request->file('signature_image');

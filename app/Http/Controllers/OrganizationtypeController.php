@@ -37,6 +37,9 @@ class OrganizationTypeController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate($request, [
+            'name' => 'required',
+        ]);
         OrganizationType::create($request->all());
         Session::flash('message', 'Created Successfully');
         return redirect()->route('organizationtype.index');
@@ -75,6 +78,9 @@ class OrganizationTypeController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $this->validate($request, [
+            'name' => 'required',
+        ]);
         $organizationtype = OrganizationType::find($id);
         $organizationtype->name = $request['name'];
         $organizationtype->status = $request['status'];

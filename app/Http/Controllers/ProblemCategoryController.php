@@ -42,6 +42,11 @@ class ProblemCategoryController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate($request, [
+            'problem_type_id' => 'required',
+            'name' => 'required',
+            'points' => 'required',
+        ]);
         ProblemCategory::create($request->all());
         Session::flash('message', 'Created Successfully');
         return redirect()->route('problemcategory.index');
@@ -81,6 +86,11 @@ class ProblemCategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $this->validate($request, [
+            'problem_type_id' => 'required',
+            'name' => 'required',
+            'points' => 'required',
+        ]);
         $problemcategory = ProblemCategory::find($id);
         $problemcategory->problem_type_id = $request['problem_type_id'];
         $problemcategory->name = $request['name'];

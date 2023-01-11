@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Department;
 use Illuminate\Contracts\Session\Session as SessionSession;
 use Illuminate\Http\Request;
@@ -17,7 +18,7 @@ class DepartmentController extends Controller
     public function index()
     {
         $departments = Department::all();
-        return view('back.pages.department.index',compact('departments'));
+        return view('back.pages.department.index', compact('departments'));
     }
 
     /**
@@ -27,7 +28,7 @@ class DepartmentController extends Controller
      */
     public function create()
     {
-        
+
         return view('back.pages.department.create');
     }
 
@@ -39,9 +40,14 @@ class DepartmentController extends Controller
      */
     public function store(Request $request)
     {
-       
+        $validated = $request->validate([
+            'departmentname' => ['required'],
+            'contact' => 'required|min:10|max:15|unique:departments',
+            'contact_network' => ['required'],
+            'code' => ['required']
+        ]);
         Department::create($request->all());
-        Session::flash('message','Created Successfully');
+        Session::flash('message', 'Created Successfully');
         return redirect()->route('department.index');
     }
 
@@ -64,9 +70,9 @@ class DepartmentController extends Controller
      */
     public function edit($id)
     {
-        $department=Department::find($id);
-        
-        return view('back.pages.department.edit',compact('department'));
+        $department = Department::find($id);
+
+        return view('back.pages.department.edit', compact('department'));
     }
 
     /**
@@ -78,18 +84,24 @@ class DepartmentController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $validated = $request->validate([
+            'departmentname' => ['required'],
+            'contact' => 'required|min:10|max:15|unique:departments,contact,' . $id,
+            'contact_network' => ['required'],
+            'code' => ['required']
+        ]);
         $department = Department::find($id);
         $department->departmentname = $request['departmentname'];
         $department->contact = $request['contact'];
         $department->contact_network = $request['contact_network'];
         $department->code = $request['code'];
         $department->status = $request['status'];
-       
+
 
         $department->save();
 
         Session::flash('message', 'Department Updated Successfully !');
-        return redirect()->route('department.index')->with('msg','updated successfully');
+        return redirect()->route('department.index')->with('msg', 'updated successfully');
     }
 
     /**

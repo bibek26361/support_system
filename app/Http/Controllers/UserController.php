@@ -47,9 +47,9 @@ class UserController extends Controller
         $request->validate([
             'department_id' => 'required',
             'name' => 'required',
-            'email' => 'required',
+            'email' => ['required', 'unique:users'],
             'password' => 'required',
-            'contact' => 'required',
+            'contact' => 'required|min:10|max:15|unique:users',
             'status' => 'required',
 
         ]);
@@ -119,6 +119,15 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'department_id' => ['required'],
+            'name' => ['required'],
+            'email' => 'required|unique:users,email,' . $id,
+            'password' => ['required'],
+            'contact' => 'required|min:10|max:15|unique:users,contact,' . $id,
+            'status' => ['required'],
+
+        ]);
         $user = User::find($id);
         $user->user_type = $request->user_type;
         if ($request->hasfile('image')) {

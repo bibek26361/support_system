@@ -40,6 +40,9 @@ class ProblemTypeController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate($request, [
+            'name' => 'required',
+        ]);
         ProblemType::create($request->all());
         Session::flash('message','Created Successfully');
         return redirect()->route('problemtype.index');
@@ -78,6 +81,9 @@ class ProblemTypeController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $this->validate($request, [
+            'name' => 'required',
+        ]);
         $problemtype = ProblemType::find($id);
         $problemtype->name = $request['name'];
         $problemtype->status = $request['status'];

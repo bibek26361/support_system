@@ -194,6 +194,12 @@ class TicketController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'organization_id' => 'required',
+            'problem_type_id' => 'required',
+            'details' => 'required'
+
+        ]);
         if ($request->assigned_to)
             $status = 1;
         else
@@ -414,6 +420,12 @@ NCT Soft Pvt Ltd
      */
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'organization_id' => 'required',
+            'problem_type_id' => 'required',
+            'details' => 'required',
+
+        ]);
         $ticket = Ticket::find($id);
         if ($request->hasfile('image')) {
             $image = $request->file('image');

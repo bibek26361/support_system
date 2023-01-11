@@ -68,3 +68,37 @@
         });
     }
 </script>
+<script src="{{asset('public/assets/vendor/datatables.net/js/jquery.dataTables.min.js')}}"></script>
+<script src="{{asset('public/assets/vendor/datatables.net-buttons/js/dataTables.buttons.min.js')}}"></script>
+<script src="{{asset('public/assets/vendor/datatables.net-buttons/js/buttons.html5.min.js')}}"></script>
+<script src="{{asset('public/assets/vendor/datatables.net-buttons/js/buttons.print.min.js')}}"></script>
+<script src="{{asset('public/assets/vendor/datatables.net-buttons/js/buttons.colVis.min.js')}}"></script>
+<script src="{{asset('public/assets/vendor/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js')}}"></script>
+<script src="{{asset('public/assets/javascript/pages/dataTables.bootstrap.js')}}"></script>
+
+<script>
+    $(function() {
+        var dataTable = $('#dataTables').DataTable({
+            dom: 'Blfrtip',
+            buttons: [{
+                    extend: 'pdf'
+                },
+                {
+                    extend: 'print'
+                },
+                {
+                    extend: 'excel'
+                },
+                {
+                    extend: 'copy'
+                },
+                {
+                    extend: 'csv'
+                }, {
+                    extend: 'colvis'
+                }
+            ],
+            autoWidth: false
+        });
+    });
+</script>

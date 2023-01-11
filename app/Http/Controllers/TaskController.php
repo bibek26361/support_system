@@ -209,6 +209,12 @@ class TaskController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'user_id' => 'required',
+            'priority' => 'required',
+            'title' => 'required',
+            'description' => 'required'
+        ]);
         $task = Task::find($id);
         if ($request->hasfile('image')) {
             $image = $request->file('image');
