@@ -30,6 +30,7 @@
                                         <th>Mobile No</th>
                                         <th>Pan/Vat No.</th>
                                         <th>Representative Name</th>
+                                        <th>Any Desk Number</th>
                                         <th>Status</th>
                                         <th>Action</th>
                                     </tr>
@@ -43,6 +44,7 @@
                                         <td>{{ $organization->mobilenumber }}</td>
                                         <td>{{ $organization->pan_vat_number }}</td>
                                         <td>{{ $organization->representativename }}</td>
+                                        <td>{{ $organization->anydesk_no }}</td>
                                         <td>
                                             @if ($organization->status)
                                                 <span class="badge badge-success"

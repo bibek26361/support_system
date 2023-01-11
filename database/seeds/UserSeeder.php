@@ -19,6 +19,8 @@ class UserSeeder extends Seeder
             'email' => 'admin@myself.com',
             'password' => bcrypt('ajakcha123'),
             'contact' => '071-537167',
+            'address' => 'Butwal',
+            'user_type' => 'Admin',
         ]);
         
         DB::table('users')->insert([
@@ -27,6 +29,8 @@ class UserSeeder extends Seeder
             'email' => 'rahulthapa043@gmail.com',
             'password' => bcrypt('rahulthapa043'),
             'contact' => '9802627682',
+            'address' => 'Butwal',
+            'user_type' => 'Staff',
         ]);
     }
 }

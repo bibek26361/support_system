@@ -7,7 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 class ProductType extends Model
 {
     protected $guarded = [];
-
+    public function product()
+    {
+        return $this->hasOne(Product::class);
+    }
     public function filterDataApi()
     {
         return [

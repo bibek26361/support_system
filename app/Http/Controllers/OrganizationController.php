@@ -44,6 +44,17 @@ class OrganizationController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
+            'organization_type_id' => ['required'],
+            'organizationname' => ['required'],
+            'address' => ['required'],
+            'phonenumber' => ['required'],
+            'mobilenumber' => 'required|min:10|max:15|unique:organizations',
+            'anydesk_no' => 'required|min:9|max:9|unique:organizations',
+            'pan_vat_number' => 'required|min:16|max:20|unique:organizations',
+            'representativename' => ['required'],
+            'status' => ['required'],
+            'longitude' => ['required'],
+            'latitude' => ['required'],
             'security_key' => 'required|min:9|max:9|unique:organizations'
         ]);
 
@@ -62,6 +73,7 @@ class OrganizationController extends Controller
         $organization->phonenumber = $request->phonenumber;
         $organization->pan_vat_number = $request->pan_vat_number;
         $organization->representativename = $request->representativename;
+        $organization->anydesk_no = $request->anydesk_no;
         $organization->api_key = $apiKey;
         $organization->security_key = $request->security_key;
         $organization->system_base_url = $request->system_base_url;
@@ -131,6 +143,17 @@ class OrganizationController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
+            'organization_type_id' => ['required'],
+            'organizationname' => ['required'],
+            'address' => ['required'],
+            'phonenumber' => ['required'],
+            'mobilenumber' => 'required|min:10|max:15|unique:organizations,mobilenumber,' . $id,
+            'anydesk_no' => 'required|min:9|max:9|unique:organizations,anydesk_no,' . $id,
+            'pan_vat_number' => 'required|min:16|max:20|unique:organizations,pan_vat_number,' . $id,
+            'representativename' => ['required'],
+            'status' => ['required'],
+            'longitude' => ['required'],
+            'latitude' => ['required'],
             'security_key' => 'required|min:9|max:9|unique:organizations,security_key,' . $id
         ]);
 
@@ -142,6 +165,7 @@ class OrganizationController extends Controller
         $organization->phonenumber = $request['phonenumber'];
         $organization->pan_vat_number = $request['pan_vat_number'];
         $organization->representativename = $request['representativename'];
+        $organization->anydesk_no = $request->anydesk_no;
         $organization->status = $request['status'];
         if ($request['security_key']) {
             $organization->security_key = $request['security_key'];
